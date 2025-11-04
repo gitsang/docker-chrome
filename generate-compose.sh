@@ -7,7 +7,7 @@ COMPOSE_FILE="compose.yaml"
 echo "---" >"$COMPOSE_FILE"
 echo "services:" >>"$COMPOSE_FILE"
 
-for dockerfile in Dockerfile.*; do
+for dockerfile in $(find . -maxdepth 1 -name 'Dockerfile.*' -type f | sort -V); do
   if [[ -f "$dockerfile" ]]; then
     # Extract browser type and version from filename
     # Format: Dockerfile.{browser}_{version}
@@ -30,7 +30,6 @@ for dockerfile in Dockerfile.*; do
     title="${title_browser} ${major_version}"
 
     cat >>"$COMPOSE_FILE" <<EOF
-
   ${service_name}:
     image: ${image_name}
     container_name: ${service_name}
@@ -51,6 +50,7 @@ for dockerfile in Dockerfile.*; do
       - "traefik.http.routers.to-${service_name}.tls.certResolver=ali_resolver"
       - "traefik.http.routers.to-${service_name}.service=${service_name}"
       - "traefik.http.services.${service_name}.loadBalancer.server.port=3000"
+
 EOF
   fi
 done

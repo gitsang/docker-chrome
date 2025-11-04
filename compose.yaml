@@ -1,5 +1,68 @@
 ---
 services:
+  chrome-81:
+    image: gitsang/browser-vnc:chrome-81.0.4044.92
+    container_name: chrome-81
+    restart: unless-stopped
+    shm_size: "512mb"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - TITLE=Chrome 81
+    volumes:
+      - /etc/fonts:/etc/fonts
+      - /usr/share/fonts:/usr/share/fonts
+      - ./chrome-81:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.to-chrome-81.rule=Host(`chrome-81.${DOMAIN}`)"
+      - "traefik.http.routers.to-chrome-81.tls.certResolver=ali_resolver"
+      - "traefik.http.routers.to-chrome-81.service=chrome-81"
+      - "traefik.http.services.chrome-81.loadBalancer.server.port=3000"
+
+  chrome-86:
+    image: gitsang/browser-vnc:chrome-86.0.4240.75
+    container_name: chrome-86
+    restart: unless-stopped
+    shm_size: "512mb"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - TITLE=Chrome 86
+    volumes:
+      - /etc/fonts:/etc/fonts
+      - /usr/share/fonts:/usr/share/fonts
+      - ./chrome-86:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.to-chrome-86.rule=Host(`chrome-86.${DOMAIN}`)"
+      - "traefik.http.routers.to-chrome-86.tls.certResolver=ali_resolver"
+      - "traefik.http.routers.to-chrome-86.service=chrome-86"
+      - "traefik.http.services.chrome-86.loadBalancer.server.port=3000"
+
+  chrome-90:
+    image: gitsang/browser-vnc:chrome-90.0.4430.72
+    container_name: chrome-90
+    restart: unless-stopped
+    shm_size: "512mb"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - TITLE=Chrome 90
+    volumes:
+      - /etc/fonts:/etc/fonts
+      - /usr/share/fonts:/usr/share/fonts
+      - ./chrome-90:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.to-chrome-90.rule=Host(`chrome-90.${DOMAIN}`)"
+      - "traefik.http.routers.to-chrome-90.tls.certResolver=ali_resolver"
+      - "traefik.http.routers.to-chrome-90.service=chrome-90"
+      - "traefik.http.services.chrome-90.loadBalancer.server.port=3000"
+
   chrome-104:
     image: gitsang/browser-vnc:chrome-104.0.5112.102
     container_name: chrome-104
@@ -105,153 +168,6 @@ services:
       - "traefik.http.routers.to-chrome-141.service=chrome-141"
       - "traefik.http.services.chrome-141.loadBalancer.server.port=3000"
 
-  chrome-81:
-    image: gitsang/browser-vnc:chrome-81.0.4044.92
-    container_name: chrome-81
-    restart: unless-stopped
-    shm_size: "512mb"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - TITLE=Chrome 81
-    volumes:
-      - /etc/fonts:/etc/fonts
-      - /usr/share/fonts:/usr/share/fonts
-      - ./chrome-81:/config
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.to-chrome-81.rule=Host(`chrome-81.${DOMAIN}`)"
-      - "traefik.http.routers.to-chrome-81.tls.certResolver=ali_resolver"
-      - "traefik.http.routers.to-chrome-81.service=chrome-81"
-      - "traefik.http.services.chrome-81.loadBalancer.server.port=3000"
-
-  chrome-86:
-    image: gitsang/browser-vnc:chrome-86.0.4240.75
-    container_name: chrome-86
-    restart: unless-stopped
-    shm_size: "512mb"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - TITLE=Chrome 86
-    volumes:
-      - /etc/fonts:/etc/fonts
-      - /usr/share/fonts:/usr/share/fonts
-      - ./chrome-86:/config
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.to-chrome-86.rule=Host(`chrome-86.${DOMAIN}`)"
-      - "traefik.http.routers.to-chrome-86.tls.certResolver=ali_resolver"
-      - "traefik.http.routers.to-chrome-86.service=chrome-86"
-      - "traefik.http.services.chrome-86.loadBalancer.server.port=3000"
-
-  chrome-90:
-    image: gitsang/browser-vnc:chrome-90.0.4430.72
-    container_name: chrome-90
-    restart: unless-stopped
-    shm_size: "512mb"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - TITLE=Chrome 90
-    volumes:
-      - /etc/fonts:/etc/fonts
-      - /usr/share/fonts:/usr/share/fonts
-      - ./chrome-90:/config
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.to-chrome-90.rule=Host(`chrome-90.${DOMAIN}`)"
-      - "traefik.http.routers.to-chrome-90.tls.certResolver=ali_resolver"
-      - "traefik.http.routers.to-chrome-90.service=chrome-90"
-      - "traefik.http.services.chrome-90.loadBalancer.server.port=3000"
-
-  firefox-100:
-    image: gitsang/browser-vnc:firefox-100.0.2
-    container_name: firefox-100
-    restart: unless-stopped
-    shm_size: "512mb"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - TITLE=Firefox 100
-    volumes:
-      - /etc/fonts:/etc/fonts
-      - /usr/share/fonts:/usr/share/fonts
-      - ./firefox-100:/config
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.to-firefox-100.rule=Host(`firefox-100.${DOMAIN}`)"
-      - "traefik.http.routers.to-firefox-100.tls.certResolver=ali_resolver"
-      - "traefik.http.routers.to-firefox-100.service=firefox-100"
-      - "traefik.http.services.firefox-100.loadBalancer.server.port=3000"
-
-  firefox-110:
-    image: gitsang/browser-vnc:firefox-110.0.1
-    container_name: firefox-110
-    restart: unless-stopped
-    shm_size: "512mb"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - TITLE=Firefox 110
-    volumes:
-      - /etc/fonts:/etc/fonts
-      - /usr/share/fonts:/usr/share/fonts
-      - ./firefox-110:/config
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.to-firefox-110.rule=Host(`firefox-110.${DOMAIN}`)"
-      - "traefik.http.routers.to-firefox-110.tls.certResolver=ali_resolver"
-      - "traefik.http.routers.to-firefox-110.service=firefox-110"
-      - "traefik.http.services.firefox-110.loadBalancer.server.port=3000"
-
-  firefox-125:
-    image: gitsang/browser-vnc:firefox-125.0.3
-    container_name: firefox-125
-    restart: unless-stopped
-    shm_size: "512mb"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - TITLE=Firefox 125
-    volumes:
-      - /etc/fonts:/etc/fonts
-      - /usr/share/fonts:/usr/share/fonts
-      - ./firefox-125:/config
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.to-firefox-125.rule=Host(`firefox-125.${DOMAIN}`)"
-      - "traefik.http.routers.to-firefox-125.tls.certResolver=ali_resolver"
-      - "traefik.http.routers.to-firefox-125.service=firefox-125"
-      - "traefik.http.services.firefox-125.loadBalancer.server.port=3000"
-
-  firefox-144:
-    image: gitsang/browser-vnc:firefox-144.0.2
-    container_name: firefox-144
-    restart: unless-stopped
-    shm_size: "512mb"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - TITLE=Firefox 144
-    volumes:
-      - /etc/fonts:/etc/fonts
-      - /usr/share/fonts:/usr/share/fonts
-      - ./firefox-144:/config
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.to-firefox-144.rule=Host(`firefox-144.${DOMAIN}`)"
-      - "traefik.http.routers.to-firefox-144.tls.certResolver=ali_resolver"
-      - "traefik.http.routers.to-firefox-144.service=firefox-144"
-      - "traefik.http.services.firefox-144.loadBalancer.server.port=3000"
-
   firefox-78:
     image: gitsang/browser-vnc:firefox-78.15.0
     container_name: firefox-78
@@ -356,3 +272,88 @@ services:
       - "traefik.http.routers.to-firefox-94.tls.certResolver=ali_resolver"
       - "traefik.http.routers.to-firefox-94.service=firefox-94"
       - "traefik.http.services.firefox-94.loadBalancer.server.port=3000"
+
+  firefox-100:
+    image: gitsang/browser-vnc:firefox-100.0.2
+    container_name: firefox-100
+    restart: unless-stopped
+    shm_size: "512mb"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - TITLE=Firefox 100
+    volumes:
+      - /etc/fonts:/etc/fonts
+      - /usr/share/fonts:/usr/share/fonts
+      - ./firefox-100:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.to-firefox-100.rule=Host(`firefox-100.${DOMAIN}`)"
+      - "traefik.http.routers.to-firefox-100.tls.certResolver=ali_resolver"
+      - "traefik.http.routers.to-firefox-100.service=firefox-100"
+      - "traefik.http.services.firefox-100.loadBalancer.server.port=3000"
+
+  firefox-110:
+    image: gitsang/browser-vnc:firefox-110.0.1
+    container_name: firefox-110
+    restart: unless-stopped
+    shm_size: "512mb"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - TITLE=Firefox 110
+    volumes:
+      - /etc/fonts:/etc/fonts
+      - /usr/share/fonts:/usr/share/fonts
+      - ./firefox-110:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.to-firefox-110.rule=Host(`firefox-110.${DOMAIN}`)"
+      - "traefik.http.routers.to-firefox-110.tls.certResolver=ali_resolver"
+      - "traefik.http.routers.to-firefox-110.service=firefox-110"
+      - "traefik.http.services.firefox-110.loadBalancer.server.port=3000"
+
+  firefox-125:
+    image: gitsang/browser-vnc:firefox-125.0.3
+    container_name: firefox-125
+    restart: unless-stopped
+    shm_size: "512mb"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - TITLE=Firefox 125
+    volumes:
+      - /etc/fonts:/etc/fonts
+      - /usr/share/fonts:/usr/share/fonts
+      - ./firefox-125:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.to-firefox-125.rule=Host(`firefox-125.${DOMAIN}`)"
+      - "traefik.http.routers.to-firefox-125.tls.certResolver=ali_resolver"
+      - "traefik.http.routers.to-firefox-125.service=firefox-125"
+      - "traefik.http.services.firefox-125.loadBalancer.server.port=3000"
+
+  firefox-144:
+    image: gitsang/browser-vnc:firefox-144.0.2
+    container_name: firefox-144
+    restart: unless-stopped
+    shm_size: "512mb"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - TITLE=Firefox 144
+    volumes:
+      - /etc/fonts:/etc/fonts
+      - /usr/share/fonts:/usr/share/fonts
+      - ./firefox-144:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.to-firefox-144.rule=Host(`firefox-144.${DOMAIN}`)"
+      - "traefik.http.routers.to-firefox-144.tls.certResolver=ali_resolver"
+      - "traefik.http.routers.to-firefox-144.service=firefox-144"
+      - "traefik.http.services.firefox-144.loadBalancer.server.port=3000"
+
