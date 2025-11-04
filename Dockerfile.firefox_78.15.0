@@ -1,4 +1,10 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:ubuntujammy
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbookworm
+
+RUN \
+  apt-get update && \
+  apt-get install -y packagekit-gtk3-module libdbus-glib-1-2 && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 RUN \
   curl -fsSL -o firefox.deb "https://sourceforge.net/projects/ubuntuzilla/files/mozilla/apt/pool/main/f/firefox-mozilla-build/firefox-mozilla-build_78.0.2-0ubuntu1_amd64.deb/download" && \
